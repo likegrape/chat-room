@@ -22,13 +22,11 @@ public class ReadDataFromServerThread extends Thread{
             InputStream clientInput = client.getInputStream();
             Scanner scanner = new Scanner(clientInput);
             while (scanner.hasNext()){
-                //if(scanner.hasNext()) {
                     String message = scanner.nextLine();
                     System.out.println("来自服务器的消息：" + message);
                     if (message.equals("bye")) {
                         break;
                     }
-                //}
             }
         } catch (IOException e) {
             e.printStackTrace();
