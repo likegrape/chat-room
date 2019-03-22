@@ -25,7 +25,6 @@ public class ExecuteClient implements Runnable{
     /**
      * 在线用户集合
      */
-    //ConcurrentHashMap 线程安全
     private static final Map<String,Socket> ONLINE_USER_MAP = new ConcurrentHashMap<>();
 
     private final Socket client;
@@ -43,7 +42,6 @@ public class ExecuteClient implements Runnable{
             Scanner scanner = new Scanner(clientInput);
             while (true){
                 String line = scanner.nextLine();
-                //TODO
                 /**
                  * 1.注册：userName：<name>
                  * 2.私聊：private:<name>:<message>
@@ -52,7 +50,6 @@ public class ExecuteClient implements Runnable{
                  */
                 if(line.startsWith("userName")){
                     String userName = line.split("\\:")[1];
-                    //TODO  这里参数校验
                     this.register(userName,client);
                     continue;
                 }
@@ -60,13 +57,11 @@ public class ExecuteClient implements Runnable{
                     String[] segments = line.split("\\:");
                     String userName = segments[1];
                     String message = segments[2];
-                    //TODO  这里参数校验
                     this.privateChat(userName,message);
                     continue;
                 }
                 if(line.startsWith("group")){
                     String message = line.split("\\:")[1];
-                    //TODO  这里参数校验
                     this.groupChat(message);
                     continue;
                 }
